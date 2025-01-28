@@ -75,5 +75,9 @@ Pthreads is usually pre-installed with GCC on Linux systems. To confirm, check f
 - ReadMe.pdf : The current file
 - Report.pdf : Report giving the analysis of the experiment done
 
+## About the Code
 
+## Executing the program
+
+## Getting Help
 
