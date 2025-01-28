@@ -71,13 +71,27 @@ Pthreads is usually pre-installed with GCC on Linux systems. To confirm, check f
 - Assignsrc1-CO23BTECH11003.c : The source code which contains the chunk method
 - Assignsrc2-CO23BTECH11003.c : The source code which contains the mixed method
 - Assignsrc3-CO23BTECH11003.c : The source code which contains the sequential method
-- input.txt : The input file which contains the value of N, K and the sudoku to be validated
-- ReadMe.pdf : The current file
-- Report.pdf : Report giving the analysis of the experiment done
+- inp.txt : The input file which contains the value of N, K and the sudoku to be validated
+- Assgn1Readme-CO23BTECH11003.txt : The current file
+- Assgn1Report-CO23BTECH11003.pdf : Report giving the analysis of the experiment done
 
 ## About the Code
 
 ## Executing the program
 
+To compile and run your program, you typically enter the following command in the command prompt:
+
+`gcc Assignsrc1-CO23BTECH11003.c -o out -lm`
+
+and then, run the program with:
+
+`./out`
+
+Similarly for the other two source files.
+
+Make sure inp.txt is in the same folder as the source files.
+
+
 ## Getting Help
+If you are stuck and need help in understanding the code as well as for executing this C program, you may please write to the email address: co23btech11003@iith.ac.in . Kindly provide with details of the exact issues that you are facing to get the correct guidence.
 
