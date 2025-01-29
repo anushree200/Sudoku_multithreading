@@ -75,7 +75,15 @@ Pthreads is usually pre-installed with GCC on Linux systems. To confirm, check f
 - Assgn1Readme-CO23BTECH11003.txt : The current file
 - Assgn1Report-CO23BTECH11003.pdf : Report giving the analysis of the experiment done
 
+
 ## About the Code
+
+This program implements parallel Sudoku validation using POSIX threads (pthreads), offering two approaches: CHUNK-based and MIXED-based thread distribution. In the CHUNK-based approach, the Sudoku grid is divided into contiguous chunks of rows, columns, and subgrids, where each thread is assigned a fixed, continuous segment to validate independently. This reduces communication overhead, as each thread only processes its designated section. The algorithm reads the `N × N` grid and number of threads `K` from `input.txt`, assigns `K1` threads to validate rows, `K2` to columns, and `K3` to subgrids, logs the validation results with timestamps, and sorts and writes them to `outputchunk.txt` along with the final validity status and execution time.  
+
+In contrast, the MIXED-based approach distributes the workload cyclically, ensuring more balanced processing. Instead of assigning contiguous chunks, threads validate rows, columns, and subgrids in a round-robin fashion, reducing idle time. The algorithm follows similar steps: reading the Sudoku grid, distributing validation tasks cyclically among `K1`, `K2`, and `K3` threads, storing results with timestamps, and writing the sorted logs to `outputmixed.txt`. While CHUNK-based validation is efficient for large Sudoku grids with sufficient threads, it may lead to workload imbalance. MIXED-based validation ensures a more even distribution of tasks, but requires synchronization to handle cyclic assignments. Both implementations leverage pthreads for concurrency and log sorting for orderly output, ensuring efficient parallel Sudoku validation.
+
+In addition to the CHUNK and MIXED parallel approaches, a SEQUENTIAL validation method was also implemented for experimentation. In this approach, a single thread processes the entire Sudoku grid without parallelization. The algorithm reads the `N × N` grid from `input.txt`, sequentially checks all rows, columns, and subgrids for duplicates, and logs the results in `outputseq.txt`. It records the total execution time and writes whether the Sudoku is valid or invalid. Since this method does not utilize multithreading, it serves as a baseline for performance comparison against the CHUNK and MIXED implementations. While SEQUENTIAL validation is simpler and avoids thread synchronization overhead, it is significantly slower for large grids due to the lack of concurrency.
+
 
 ## Executing the program
 
