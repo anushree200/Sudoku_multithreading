@@ -100,6 +100,66 @@ Similarly for the other two source files.
 Make sure inp.txt is in the same folder as the source files.
 
 
+## Experiment
+
+9X9,16X16, 25X25, 36X36, 49X49 and 64X64.
+
+9X9:
+seq:255
+chunk: 18320
+mixed: 77101
+
+16X16:
+seq: 814
+chunk: 13643
+mixed: 91387
+
+25*25:
+seq: 814
+chunk: 13643
+mixed:
+
+36*36:
+seq: 
+chunk:
+mixed:
+
+49*49:
+seq:
+chunk:
+mixed:
+
+64*64:
+seq:
+chunk:
+mixed:
+
+128*128:
+seq:
+chunk:
+mixed:
+
+256*256:
+seq:
+chunk:
+mixed:
+
+512*512:
+seq:
+chunk:
+mixed:
+
+1024*1024:
+seq:
+chunk:
+mixed:
+
+2048*2048:
+seq:
+chunk:
+mixed:
+
+
 ## Getting Help
 If you are stuck and need help in understanding the code as well as for executing this C program, you may please write to the email address: co23btech11003@iith.ac.in . Kindly provide with details of the exact issues that you are facing to get the correct guidence.
 
