@@ -214,3 +214,61 @@ This experiment demonstrates how the optimal algorithm choice for Sudoku validat
 ## Getting Help
 If you are stuck and need help in understanding the code as well as for executing this C program, you may please write to the email address: co23btech11003@iith.ac.in . Kindly provide with details of the exact issues that you are facing to get the correct guidence.
 
+
+
+
+
+
+Prerequisite Theory
+1. Introduction to Pthreads (POSIX Threads)
+pthreads (POSIX threads) is a standard for implementing multithreaded programming in C. It provides a set of functions for creating, managing, and synchronizing threads in a parallel computing environment. Threads are lightweight units of execution that can run concurrently, which makes them an essential tool for improving performance in multi-core systems.
+
+Key Concepts in Pthreads:
+Thread Creation: In pthreads, threads are created using the pthread_create() function. Each thread runs a specific function concurrently with other threads.
+Thread Synchronization: Threads need to coordinate when accessing shared resources. This is done using synchronization mechanisms such as mutexes (pthread_mutex_t), condition variables (pthread_cond_t), and barriers.
+Thread Joining: After a thread finishes its task, it can be joined with the main thread using pthread_join(). This ensures that all threads have completed before continuing with the rest of the program.
+Thread Termination: A thread terminates when its function execution ends. The program can either continue executing other threads or finish after all threads are done.
+2. Parallelization with Pthreads
+Parallel programming involves dividing a task into smaller sub-tasks that can be processed simultaneously. By leveraging multiple cores of a processor, parallelization can significantly reduce the time required to solve large problems, such as Sudoku validation. In the case of pthreads, each thread can be assigned a subset of the validation task to be executed in parallel.
+
+Benefits of Parallelization:
+Speedup: By running multiple threads concurrently, tasks can be completed faster, especially for large datasets.
+Efficiency: By using multiple cores of a CPU, parallel programs make efficient use of system resources.
+Scalability: For large problems, adding more threads can improve performance by distributing the workload across the threads.
+3. How Chunk and Mixed Algorithms Work
+Chunk Algorithm
+In the Chunk algorithm, the Sudoku validation task is divided into multiple chunks, and each chunk is processed by a different thread. A chunk can represent a row, column, or subgrid of the Sudoku grid, depending on the chosen approach.
+
+For example:
+
+Chunking by Rows: If there are N rows in the Sudoku grid and T threads, the work is divided into T chunks. Each thread processes one chunk (one or more rows), validating the uniqueness of values in those rows.
+Chunking by Subgrids: The grid is divided into T subgrids, with each thread validating a specific subgrid.
+Each thread independently checks its assigned chunk for violations of Sudoku rules (like duplicate numbers), and if any thread finds an error, it flags the Sudoku as invalid.
+
+Mixed Algorithm
+The Mixed algorithm combines both parallel and sequential execution:
+
+The grid is divided into larger chunks (such as rows or columns) and processed in parallel.
+For certain parts of the Sudoku grid (typically subgrids), a sequential validation process is applied. This can help avoid unnecessary parallelization overhead for smaller tasks.
+For instance, the Mixed approach could validate the rows and columns in parallel (because they are large chunks of work), but check the smaller subgrids sequentially (to minimize overhead). This approach tries to balance parallel and sequential execution to minimize time complexity.
+
+Why Mixed Algorithm can be Faster
+The Mixed algorithm can be faster than the pure Chunk algorithm in certain cases because:
+
+Reduced Thread Overhead: For smaller tasks, the overhead of creating and managing threads can reduce the performance benefits of parallelism. The Mixed algorithm avoids this by handling small tasks sequentially.
+Optimal Parallelization: Larger chunks like rows or columns are handled in parallel, where the benefit of parallelism is maximized.
+4. Performance of Parallelization
+When solving a problem like Sudoku validation, the speedup gained from parallelization depends on how the work is divided, the number of available threads, and the overhead of managing the threads. Parallelizing with pthreads can reduce the overall execution time by distributing the workload across multiple CPU cores.
+
+Factors Affecting Performance:
+Thread Overhead: The creation and management of threads have some overhead, especially when the work is not large enough to warrant parallelization. For small grids (e.g., 9x9), the overhead of creating threads may outweigh the benefits.
+Load Balancing: The way the grid is divided among threads is crucial. If some threads have much more work than others, those threads may become bottlenecks, reducing overall performance. Load balancing ensures that all threads have roughly equal work to do.
+Synchronization Overhead: Threads need to coordinate their access to shared resources (like the Sudoku grid). Synchronization mechanisms (like mutexes) are used to prevent data corruption, but they can add overhead, especially if they are used excessively.
+5. Time Complexity and Scalability
+The time complexity of a parallel algorithm is typically analyzed in terms of the number of threads and the size of the problem. For Sudoku validation:
+
+Sequential: The sequential time complexity is O(N^2), where N is the size of the Sudoku grid (number of rows or columns).
+Chunk and Mixed Algorithms: The time complexity for the parallelized algorithms is typically O(N^2 / T), where T is the number of threads. This assumes that the workload is evenly distributed and that there is minimal overhead.
+As the grid size increases (for example, from 9x9 to 1024x1024), the performance improvement due to parallelization becomes more pronounced. For smaller grids, the sequential algorithm may outperform parallel algorithms due to thread creation and synchronization overhead.
+
+
