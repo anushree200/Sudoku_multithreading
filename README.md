@@ -159,7 +159,7 @@ seq:
 chunk:
 mixed:
 
-## Report
+# Report
 
 ### **Experiment 1 Report: Performance Analysis of Sudoku Validation with Varying Sizes**
 
