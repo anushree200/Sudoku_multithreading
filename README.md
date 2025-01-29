@@ -159,6 +159,57 @@ seq:
 chunk:
 mixed:
 
+## Report
+
+### **Experiment 1 Report: Performance Analysis of Sudoku Validation with Varying Sizes**
+
+**Objective:**
+In this experiment, we analyze the performance of Sudoku validation algorithms by varying the size of the Sudoku grid (N = 9, 16, 25, 36, 49, and 64) and keeping the number of threads constant at 8. The performance comparison involves three algorithms: **Sequential**, **CHUNK**, and **Mixed**. We measure the time taken for each algorithm to validate the Sudoku grid and plot the results on a graph with the size of the Sudoku grid on the x-axis and time taken on the y-axis.
+
+### **Key Observations:**
+
+1. **For Smaller Sudoku Sizes (9x9, 16x16, 25x25, 36x36, 49x49):**
+   - **Sequential** performs better than **CHUNK**, which in turn performs better than **Mixed**.
+   - This is expected because with smaller grids, the computational overhead associated with threading and chunking becomes more significant. The sequential algorithm benefits from having no parallelization overhead.
+   - **Sequential** processing has the advantage in smaller grid sizes because the grid is small enough that the overhead of managing threads or splitting the work into chunks can outweigh the benefits of parallelization.
+   
+   **Why is Sequential Faster?**
+   - With small grid sizes, the number of operations is relatively small. The overhead of creating, managing, and synchronizing multiple threads (in CHUNK and Mixed approaches) can take longer than simply performing the validation sequentially in a single thread.
+   - The smaller the grid, the less time it takes for a single thread to finish the task. Thus, for smaller N values, there is no significant parallelism to exploit, and the sequential approach becomes more efficient.
+
+2. **For Larger Sudoku Sizes (1024x1024, 2048x2048):**
+   - **Mixed** algorithm performs the best, followed by **CHUNK**, with **Sequential** being the slowest.
+   - As the grid size increases, the amount of work grows significantly. For large grids like 1024x1024 or 2048x2048, the **Mixed** approach, which combines sequential and parallel computation efficiently, starts to outperform the others.
+   - **CHUNK** also shows good performance because it divides the workload into manageable pieces that can be processed in parallel. However, **Mixed** provides an optimized balance between parallel processing and minimizing synchronization overhead.
+   
+   **Why is Mixed Faster?**
+   - As the grid size increases, the parallelization benefits become more pronounced. The time spent on the computational tasks (such as validating rows, columns, and subgrids) grows significantly, making parallelism more efficient.
+   - The **Mixed** algorithm optimizes the use of threads, ensuring the workload is balanced while avoiding excessive synchronization. This reduces the overall execution time as the algorithm scales with the problem size.
+   - **CHUNK** also benefits from parallelism but might be slightly less efficient than **Mixed** because of the fixed chunk sizes and potential overhead of chunk distribution.
+
+3. **For Large Grid Sizes:**
+   - With larger Sudoku grids, the number of operations (validations of rows, columns, and subgrids) grows substantially. The sequential algorithm struggles with the sheer volume of work, leading to longer execution times.
+   - Parallelizing the workload (with **CHUNK** and **Mixed**) drastically reduces the time taken by dividing the task among multiple threads. The parallel overhead is outweighed by the reduced time per operation.
+
+### **Explanation of Results:**
+
+- **Smaller Grid Sizes (9x9 to 49x49):**
+  - **Sequential** is faster than **CHUNK** and **Mixed** due to the relatively small number of computations. For small grids, the overhead of managing threads and distributing tasks across chunks becomes a bottleneck, making parallelism less efficient.
+  
+- **Larger Grid Sizes (1024x1024, 2048x2048):**
+  - The larger the grid size, the greater the computational demand. Parallelism through **Mixed** and **CHUNK** allows for efficient handling of the increased number of operations, leading to faster execution times.
+  - **Mixed** outperforms **CHUNK** due to its more optimized approach to parallelism and reduced synchronization overhead. **CHUNK**, though still benefiting from parallelism, has slightly higher overhead due to static chunking.
+  - **Sequential**, on the other hand, performs poorly for large grid sizes due to the large number of operations and the lack of parallel processing.
+
+### **Conclusion:**
+
+- For **smaller Sudoku grids**, **Sequential** proves to be the most efficient due to its lower overhead and the limited computational complexity.
+- For **larger Sudoku grids**, **Mixed** shows significant improvements in performance, outpacing both **CHUNK** and **Sequential**. This is because the increase in computational complexity can be effectively handled by parallelization, and the **Mixed** approach ensures efficient thread management.
+- The **CHUNK** approach also benefits from parallelization but doesn’t scale as well as the **Mixed** approach for larger grid sizes due to its simpler approach to dividing the workload.
+  
+This experiment demonstrates how the optimal algorithm choice for Sudoku validation shifts depending on the size of the grid, highlighting the importance of parallelization strategies for larger problems.
+
+
 
 ## Getting Help
 If you are stuck and need help in understanding the code as well as for executing this C program, you may please write to the email address: co23btech11003@iith.ac.in . Kindly provide with details of the exact issues that you are facing to get the correct guidence.
